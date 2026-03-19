@@ -14,6 +14,7 @@ CLEAN_OUTPUT_DIR = INPUT_DIR / "cleaned"
 ANALYSIS_DIR = REPO_ROOT / "analysis"
 SITE_COMPARISON_PATH = ANALYSIS_DIR / "site_comparison.csv"
 QA_SUMMARY_PATH = ANALYSIS_DIR / "qa_summary.csv"
+SEASONAL_COMPARISON_PATH = ANALYSIS_DIR / "seasonal_wind_comparison.csv"
 
 CLEAN_OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 ANALYSIS_DIR.mkdir(parents=True, exist_ok=True)
@@ -26,6 +27,15 @@ R_DRY_AIR = 287.05  # J/(kg·K)
 
 # Expected timestep frequency
 EXPECTED_FREQ = "1h"
+
+# Seasonal definitions
+WINTER_MONTHS = [12, 1, 2]
+SUMMER_MONTHS = [6, 7, 8]
+
+# Required columns
+REQUIRED_COLUMNS = {
+    "timestep", "u100", "v100", "u10", "v10", "t2m", "sp", "latitude", "longitude"
+}
 
 # ----------------------------
 # Helper Functions
@@ -50,7 +60,6 @@ def compute_wind_metrics(df: pd.DataFrame) -> pd.DataFrame:
     - t2m in Kelvin
     - sp in Pascals
     """
-    # Wind speeds
     df["ws_100"] = np.sqrt(df["u100"] ** 2 + df["v100"] ** 2)
     df["ws_10"] = np.sqrt(df["u10"] ** 2 + df["v10"] ** 2)
 
@@ -59,14 +68,27 @@ def compute_wind_metrics(df: pd.DataFrame) -> pd.DataFrame:
     df["wd_10"] = (180 + np.degrees(np.arctan2(df["u10"], df["v10"]))) % 360
 
     # Air density from ideal gas law
-    # rho = p / (R * T)
     df["rho"] = df["sp"] / (R_DRY_AIR * df["t2m"])
 
     # Wind power density at 100 m
-    # P/A = 0.5 * rho * v^3
     df["power_density"] = 0.5 * df["rho"] * (df["ws_100"] ** 3)
 
     return df
+
+
+def compute_seasonal_metrics(df: pd.DataFrame) -> dict:
+    """
+    Compute seasonal mean wind speeds at 100 m.
+    """
+    month = df["timestep"].dt.month
+
+    winter_mean_ws_100 = df.loc[month.isin(WINTER_MONTHS), "ws_100"].mean()
+    summer_mean_ws_100 = df.loc[month.isin(SUMMER_MONTHS), "ws_100"].mean()
+
+    return {
+        "winter_mean_ws_100": winter_mean_ws_100,
+        "summer_mean_ws_100": summer_mean_ws_100,
+    }
 
 
 def run_qa_checks(df: pd.DataFrame, site_name: str) -> dict:
@@ -77,15 +99,16 @@ def run_qa_checks(df: pd.DataFrame, site_name: str) -> dict:
     - duplicate timesteps
     - missing timesteps
     - extreme wind speed counts
-    - basic contextual statistics
+    - contextual statistics
+    - seasonal wind speed metrics
     """
-    # Ensure sorted by timestep
+    if df.empty:
+        raise ValueError(f"{site_name} contains no rows.")
+
     df = df.sort_values("timestep").reset_index(drop=True)
 
-    # Duplicate timesteps
     duplicate_timestamps = int(df["timestep"].duplicated().sum())
 
-    # Missing timestamps
     full_range = pd.date_range(
         start=df["timestep"].min(),
         end=df["timestep"].max(),
@@ -94,11 +117,10 @@ def run_qa_checks(df: pd.DataFrame, site_name: str) -> dict:
     )
     missing_timestamps_count = int(len(full_range.difference(df["timestep"])))
 
-    # Missing values total
     missing_values_total = int(df.isna().sum().sum())
-
-    # Extreme wind speeds
     extreme_ws_100_count = int((df["ws_100"] > EXTREME_WS_THRESHOLD).sum())
+
+    seasonal_metrics = compute_seasonal_metrics(df)
 
     qa = {
         "site": site_name,
@@ -120,6 +142,7 @@ def run_qa_checks(df: pd.DataFrame, site_name: str) -> dict:
         "longitude": df["longitude"].iloc[0],
         "start_timestep": df["timestep"].min(),
         "end_timestep": df["timestep"].max(),
+        **seasonal_metrics,
     }
 
     return qa
@@ -128,6 +151,7 @@ def run_qa_checks(df: pd.DataFrame, site_name: str) -> dict:
 def export_clean_dataset(df: pd.DataFrame, input_file: Path) -> Path:
     """
     Save cleaned/enhanced dataset to processed/cleaned using same filename.
+    Overwrites existing file if present.
     """
     output_path = CLEAN_OUTPUT_DIR / input_file.name
     df.to_csv(output_path, index=False)
@@ -136,36 +160,34 @@ def export_clean_dataset(df: pd.DataFrame, input_file: Path) -> Path:
 
 def process_single_file(file_path: Path) -> tuple[pd.DataFrame, dict]:
     """
-    Load, standardise timestamps, compute wind metrics, run QA, export cleaned file.
+    Load, parse timestamps, compute wind metrics, run QA, export cleaned file.
     """
     site_name = derive_site_name(file_path)
     print(f"Processing site: {site_name} ({file_path.name})")
 
     df = pd.read_csv(file_path)
 
-    required_columns = {
-        "timestep", "u100", "v100", "u10", "v10", "t2m", "sp", "latitude", "longitude"
-    }
-    missing_cols = required_columns - set(df.columns)
+    if df.empty:
+        raise ValueError(f"{file_path.name} is empty.")
+
+    missing_cols = REQUIRED_COLUMNS - set(df.columns)
     if missing_cols:
         raise ValueError(
             f"{file_path.name} is missing required columns: {sorted(missing_cols)}"
         )
 
-    # Parse timestep as UTC-aware datetime
     df["timestep"] = pd.to_datetime(df["timestep"], utc=True, errors="raise")
 
-    # Sort and compute metrics
     df = df.sort_values("timestep").reset_index(drop=True)
     df = compute_wind_metrics(df)
 
-    # QA
     qa_result = run_qa_checks(df, site_name)
 
-    # Export cleaned dataset
     output_path = export_clean_dataset(df, file_path)
     print(f"  Clean dataset saved to: {output_path}")
     print(f"  Mean ws_100: {qa_result['mean_ws_100']:.2f} m/s")
+    print(f"  Winter mean ws_100: {qa_result['winter_mean_ws_100']:.2f} m/s")
+    print(f"  Summer mean ws_100: {qa_result['summer_mean_ws_100']:.2f} m/s")
     print(f"  Mean power density: {qa_result['mean_power_density']:.2f} W/m²")
     print()
 
@@ -182,12 +204,6 @@ def main() -> None:
     if not csv_files:
         raise FileNotFoundError(f"No CSV files found in {INPUT_DIR}")
 
-    # Prevent re-reading files from /cleaned if present in same folder tree
-    csv_files = [f for f in csv_files if "cleaned" not in f.parts]
-
-    if not csv_files:
-        raise FileNotFoundError("No source CSV files found after filtering.")
-
     print(f"Found {len(csv_files)} processed ERA5 files.\n")
 
     qa_results = []
@@ -196,7 +212,6 @@ def main() -> None:
         _, qa = process_single_file(csv_file)
         qa_results.append(qa)
 
-    # QA summary table
     qa_df = pd.DataFrame(qa_results).sort_values(
         by="mean_ws_100", ascending=False
     ).reset_index(drop=True)
@@ -204,7 +219,7 @@ def main() -> None:
     # Full QA summary
     qa_df.to_csv(QA_SUMMARY_PATH, index=False)
 
-    # Site comparison file (focused subset for ranking/comparison)
+    # Site comparison file
     comparison_cols = [
         "site",
         "latitude",
@@ -217,6 +232,8 @@ def main() -> None:
         "mean_rho",
         "mean_power_density",
         "mean_ws_10",
+        "winter_mean_ws_100",
+        "summer_mean_ws_100",
         "duplicate_timestamps",
         "missing_timestamps",
         "extreme_ws_100_count",
@@ -224,9 +241,20 @@ def main() -> None:
     comparison_df = qa_df[comparison_cols]
     comparison_df.to_csv(SITE_COMPARISON_PATH, index=False)
 
+    # Dedicated seasonal comparison file
+    seasonal_df = qa_df[
+        ["site", "winter_mean_ws_100", "summer_mean_ws_100"]
+    ].copy()
+
+    seasonal_df["winter_mean_ws_100"] = seasonal_df["winter_mean_ws_100"].round(2)
+    seasonal_df["summer_mean_ws_100"] = seasonal_df["summer_mean_ws_100"].round(2)
+
+    seasonal_df.to_csv(SEASONAL_COMPARISON_PATH, index=False)
+
     print("Wind resource analysis complete.")
     print(f"QA summary saved to: {QA_SUMMARY_PATH}")
     print(f"Site comparison saved to: {SITE_COMPARISON_PATH}")
+    print(f"Seasonal comparison saved to: {SEASONAL_COMPARISON_PATH}")
 
 
 if __name__ == "__main__":

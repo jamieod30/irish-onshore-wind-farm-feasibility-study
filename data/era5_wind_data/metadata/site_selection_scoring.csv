@@ -1,0 +1,6 @@
+rank,site,latitude,longitude,mean_ws_100,mean_power_density,weibull_c,weibull_k,winter_mean_ws_100,shear_exponent,turbulence_proxy,dominant_dir_1,dominant_dir_1_pct,dominant_dir_2,dominant_dir_2_pct,top2_directional_share_pct,resource_index,resource_score,weibull_k_score,directional_consistency_score,winter_score,shear_score,turbulence_score,weighted_score
+1,galway,53.5,-9.75,7.912,532.495,8.935,2.206,8.845,0.206,0.478,SW,10.747,WSW,10.584,21.331,1.0,5.0,1.739,2.518,5.0,4.0,1.738,3.836
+2,donegal,54.75,-8.0,7.196,384.9,8.12,2.288,8.021,0.229,0.462,WSW,10.678,SW,10.384,21.061,0.405,2.621,2.943,1.959,2.782,4.0,2.995,2.797
+3,mayo,53.75,-9.5,7.23,402.472,8.166,2.235,8.03,0.223,0.473,WSW,10.968,SW,10.561,21.528,0.45,2.8,2.157,2.926,2.806,4.0,2.169,2.774
+4,midlands,53.25,-7.25,6.679,296.006,7.529,2.427,7.359,0.233,0.436,WSW,11.907,W,10.623,22.53,0.0,1.0,5.0,5.0,1.0,4.0,5.0,2.7
+5,kerry,52.25,-10.0,7.214,411.162,8.144,2.156,8.014,0.211,0.488,SW,10.321,WSW,10.277,20.598,0.453,2.81,1.0,1.0,2.761,4.0,1.0,2.291

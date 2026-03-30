@@ -1,0 +1,15 @@
+{
+  "site_key": "selected_site",
+  "site_name": "galway",
+  "source": "ERA5 reanalysis screening dataset",
+  "selection_method": "engineering weighted scoring model",
+  "coordinates": {
+    "latitude": 53.5,
+    "longitude": -9.75
+  },
+  "wind_direction_sectors": 16,
+  "notes": [
+    "This folder stores the reduced wind-climate inputs used for baseline PyWake modelling.",
+    "The selected site is currently Galway, but the folder is named selected_site to keep the workflow reusable."
+  ]
+}

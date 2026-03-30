@@ -1,0 +1,13 @@
+{
+  "turbine_model": "Vestas V136-4.2 MW",
+  "manufacturer": "Vestas",
+  "rated_power_mw": 4.2,
+  "rotor_diameter_m": 136,
+  "hub_height_m": 112,
+  "status": "baseline turbine assumption for preliminary wake modelling",
+  "curve_data_status": "power and CT curves to be added before PyWake execution",
+  "notes": [
+    "This turbine definition is fixed for the baseline wake study",
+    "Curve data should be traceable to a public source or clearly labelled as representative engineering assumptions"
+  ]
+}

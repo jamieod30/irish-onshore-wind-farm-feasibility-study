@@ -1,0 +1,2 @@
+site,n_sectors,probability_sum,weibull_k,weibull_c,dominant_dir_1_deg,dominant_dir_1_prob,dominant_dir_2_deg,dominant_dir_2_prob,dominant_dir_3_deg,dominant_dir_3_prob
+galway,16,1.0,2.2064009038179693,8.93547298172113,225.0,0.10747094968668248,247.5,0.10584352375737666,270.0,0.09704477702743809

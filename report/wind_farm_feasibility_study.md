@@ -1,4 +1,4 @@
-First, WIND SPEED DISTRIBUTION:
+hFirst, WIND SPEED DISTRIBUTION:
 Code:
 import matplotlib.pyplot as plt
 

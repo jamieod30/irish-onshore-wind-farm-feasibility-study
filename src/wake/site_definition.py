@@ -123,7 +123,6 @@ def build_site() -> UniformWeibullSite:
         p_wd=p_wd,
         a=a_arr,
         k=k_arr,
-        wd=wd,
         ti=0.1,
     )
 

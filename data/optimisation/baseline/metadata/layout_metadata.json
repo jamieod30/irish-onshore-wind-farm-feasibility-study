@@ -1,0 +1,28 @@
+{
+  "layout_name": "baseline_aligned",
+  "site": "galway",
+  "status": "initial unconstrained baseline layout",
+  "description": "Preliminary layout anchored to the selected Galway ERA5 reference location and arranged using feasibility-stage spacing assumptions prior to constraint screening or wake-driven refinement.",
+  "coordinate_system": "EPSG:32629",
+  "origin_note": "The first-pass layout origin was tied to the selected Galway ERA5 screening point to maintain consistency between site screening and baseline layout development.",
+  "turbine_model": "Vestas V136-4.2 MW",
+  "manufacturer": "Vestas",
+  "hub_height_m": 112,
+  "rotor_diameter_m": 136,
+  "rated_power_mw": 4.2,
+  "n_turbines": 12,
+  "installed_capacity_mw": 50.4,
+  "spacing_basis": {
+    "short_spacing_m": 680.236724,
+    "long_spacing_m": 951.765727,
+    "short_spacing_D": 5.001741,
+    "long_spacing_D": 6.998277,
+    "design_intent": "baseline 5D x 7D spacing"
+  },
+  "limitations": [
+    "No spatial constraints applied yet",
+    "No wake optimisation applied yet",
+    "No terrain or flow-acceleration modelling applied yet",
+    "Layout is intended as a baseline geometry for preliminary wake modelling"
+  ]
+}

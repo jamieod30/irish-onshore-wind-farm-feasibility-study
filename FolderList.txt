@@ -1,0 +1,9 @@
+.git
+analysis
+archive
+data
+notebooks
+outputs
+report
+scripts
+src

@@ -1,0 +1,2 @@
+rank_by_case_net_aep,case_id,case_layout_name,case_num_turbines,case_installed_capacity_mw,case_net_aep_gwh,case_wake_loss_pct,case_net_capacity_factor,delta_net_aep_gwh,delta_wake_loss_pct,pct_change_net_aep_gwh
+1,fid_7,layout_fid7_6t_candidate,6,25.2,66.58623997288458,4.146247220053476,0.3016336883601715,-65.66999171129513,-0.6594893658751158,-49.65360866179168

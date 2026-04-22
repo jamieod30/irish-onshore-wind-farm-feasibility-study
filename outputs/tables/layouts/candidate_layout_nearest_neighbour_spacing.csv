@@ -1,0 +1,24 @@
+source_layout_csv,case_id,layout_name,turbine_model,rotor_diameter_m,turbine_id,nearest_turbine_id,nearest_distance_m,nearest_distance_D
+data/optimisation/fid_7/candidate_layouts/layout_fid7_12t_candidate.csv,fid_7,layout_fid7_12t_candidate,Vestas V136-4.2 MW,136.0,T03,T05,451.7167253932491,3.3214465102444786
+data/optimisation/fid_7/candidate_layouts/layout_fid7_12t_candidate.csv,fid_7,layout_fid7_12t_candidate,Vestas V136-4.2 MW,136.0,T05,T03,451.7167253932491,3.3214465102444786
+data/optimisation/fid_7/candidate_layouts/layout_fid7_12t_candidate.csv,fid_7,layout_fid7_12t_candidate,Vestas V136-4.2 MW,136.0,T09,T10,478.740012950662,3.5201471540489853
+data/optimisation/fid_7/candidate_layouts/layout_fid7_12t_candidate.csv,fid_7,layout_fid7_12t_candidate,Vestas V136-4.2 MW,136.0,T10,T09,478.740012950662,3.5201471540489853
+data/optimisation/fid_7/candidate_layouts/layout_fid7_12t_candidate.csv,fid_7,layout_fid7_12t_candidate,Vestas V136-4.2 MW,136.0,T07,T09,495.54919029295166,3.6437440462717032
+data/optimisation/fid_7/candidate_layouts/layout_fid7_12t_candidate.csv,fid_7,layout_fid7_12t_candidate,Vestas V136-4.2 MW,136.0,T11,T12,504.9138540384884,3.712601867930062
+data/optimisation/fid_7/candidate_layouts/layout_fid7_12t_candidate.csv,fid_7,layout_fid7_12t_candidate,Vestas V136-4.2 MW,136.0,T12,T11,504.9138540384884,3.712601867930062
+data/optimisation/fid_7/candidate_layouts/layout_fid7_12t_candidate.csv,fid_7,layout_fid7_12t_candidate,Vestas V136-4.2 MW,136.0,T02,T04,523.8291706272189,3.8516850781413154
+data/optimisation/fid_7/candidate_layouts/layout_fid7_12t_candidate.csv,fid_7,layout_fid7_12t_candidate,Vestas V136-4.2 MW,136.0,T04,T02,523.8291706272189,3.8516850781413154
+data/optimisation/fid_7/candidate_layouts/layout_fid7_12t_candidate.csv,fid_7,layout_fid7_12t_candidate,Vestas V136-4.2 MW,136.0,T06,T02,548.733997488765,4.034808805064449
+data/optimisation/fid_7/candidate_layouts/layout_fid7_12t_candidate.csv,fid_7,layout_fid7_12t_candidate,Vestas V136-4.2 MW,136.0,T08,T10,611.4981602588841,4.496310001903559
+data/optimisation/fid_7/candidate_layouts/layout_fid7_12t_candidate.csv,fid_7,layout_fid7_12t_candidate,Vestas V136-4.2 MW,136.0,T01,T05,734.842159922796,5.403251175902912
+data/optimisation/fid_7/candidate_layouts/layout_fid7_5t_candidate.csv,fid_7,layout_fid7_5t_candidate,Vestas V136-4.2 MW,136.0,T03,T04,744.5266952903704,5.474460994782135
+data/optimisation/fid_7/candidate_layouts/layout_fid7_5t_candidate.csv,fid_7,layout_fid7_5t_candidate,Vestas V136-4.2 MW,136.0,T04,T03,744.5266952903704,5.474460994782135
+data/optimisation/fid_7/candidate_layouts/layout_fid7_5t_candidate.csv,fid_7,layout_fid7_5t_candidate,Vestas V136-4.2 MW,136.0,T02,T04,775.6004125836963,5.702944210174238
+data/optimisation/fid_7/candidate_layouts/layout_fid7_5t_candidate.csv,fid_7,layout_fid7_5t_candidate,Vestas V136-4.2 MW,136.0,T05,T02,1057.1707525277077,7.7733143568213805
+data/optimisation/fid_7/candidate_layouts/layout_fid7_5t_candidate.csv,fid_7,layout_fid7_5t_candidate,Vestas V136-4.2 MW,136.0,T01,T02,1082.2957082054793,7.958056677981466
+data/optimisation/fid_7/candidate_layouts/layout_fid7_6t_candidate.csv,fid_7,layout_fid7_6t_candidate,Vestas V136-4.2 MW,136.0,T02,T06,569.2451141643642,4.185625839443854
+data/optimisation/fid_7/candidate_layouts/layout_fid7_6t_candidate.csv,fid_7,layout_fid7_6t_candidate,Vestas V136-4.2 MW,136.0,T06,T02,569.2451141643642,4.185625839443854
+data/optimisation/fid_7/candidate_layouts/layout_fid7_6t_candidate.csv,fid_7,layout_fid7_6t_candidate,Vestas V136-4.2 MW,136.0,T01,T06,580.0448258540024,4.265035484220606
+data/optimisation/fid_7/candidate_layouts/layout_fid7_6t_candidate.csv,fid_7,layout_fid7_6t_candidate,Vestas V136-4.2 MW,136.0,T04,T06,657.1362111465172,4.831883905489097
+data/optimisation/fid_7/candidate_layouts/layout_fid7_6t_candidate.csv,fid_7,layout_fid7_6t_candidate,Vestas V136-4.2 MW,136.0,T03,T04,744.5266952903704,5.474460994782135
+data/optimisation/fid_7/candidate_layouts/layout_fid7_6t_candidate.csv,fid_7,layout_fid7_6t_candidate,Vestas V136-4.2 MW,136.0,T05,T02,1057.1707525277077,7.7733143568213805

@@ -1,13 +1,12 @@
+from __future__ import annotations
+
 from pathlib import Path
+
+import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
 from scipy.stats import weibull_min
 from windrose import WindroseAxes
-
-# ----------------------------
-# Configuration
-# ----------------------------
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 
@@ -30,8 +29,8 @@ DERIVED_DIR.mkdir(parents=True, exist_ok=True)
 FIGURES_DIR.mkdir(parents=True, exist_ok=True)
 TABLES_DIR.mkdir(parents=True, exist_ok=True)
 
-EXTREME_WS_THRESHOLD = 40.0  # m/s
-R_DRY_AIR = 287.05  # J/(kg·K)
+EXTREME_WS_THRESHOLD = 40.0
+R_DRY_AIR = 287.05
 EXPECTED_FREQ = "1h"
 
 WINTER_MONTHS = [12, 1, 2]
@@ -72,6 +71,8 @@ def derive_site_name(file_path: Path) -> str:
 
 
 def compute_wind_metrics(df: pd.DataFrame) -> pd.DataFrame:
+    df = df.copy()
+
     df["ws_100"] = np.sqrt(df["u100"] ** 2 + df["v100"] ** 2)
     df["ws_10"] = np.sqrt(df["u10"] ** 2 + df["v10"] ** 2)
 
@@ -382,101 +383,107 @@ def process_single_file(file_path: Path) -> tuple[pd.DataFrame, dict, pd.DataFra
     return df, qa_result, monthly_climatology_df, directional_frequency_df
 
 
-def main() -> None:
-    csv_files = sorted(INPUT_DIR.glob("*.csv"))
+def main() -> int:
+    try:
+        csv_files = sorted(INPUT_DIR.glob("*.csv"))
 
-    if not csv_files:
-        raise FileNotFoundError(f"No CSV files found in {INPUT_DIR}")
+        if not csv_files:
+            raise FileNotFoundError(f"No CSV files found in {INPUT_DIR}")
 
-    print(f"Found {len(csv_files)} processed ERA5 files.\n")
+        print(f"Found {len(csv_files)} processed ERA5 files.\n")
 
-    qa_results = []
-    monthly_climatology_results = []
-    directional_frequency_results = []
+        qa_results = []
+        monthly_climatology_results = []
+        directional_frequency_results = []
 
-    for csv_file in csv_files:
-        _, qa, monthly_climatology_df, directional_frequency_df = process_single_file(csv_file)
-        qa_results.append(qa)
-        monthly_climatology_results.append(monthly_climatology_df)
-        directional_frequency_results.append(directional_frequency_df)
+        for csv_file in csv_files:
+            _, qa, monthly_climatology_df, directional_frequency_df = process_single_file(csv_file)
+            qa_results.append(qa)
+            monthly_climatology_results.append(monthly_climatology_df)
+            directional_frequency_results.append(directional_frequency_df)
 
-    qa_df = pd.DataFrame(qa_results).sort_values(
-        by="mean_ws_100", ascending=False
-    ).reset_index(drop=True)
+        qa_df = pd.DataFrame(qa_results).sort_values(
+            by="mean_ws_100", ascending=False
+        ).reset_index(drop=True)
 
-    qa_df.to_csv(QA_SUMMARY_PATH, index=False)
+        qa_df.to_csv(QA_SUMMARY_PATH, index=False)
 
-    comparison_cols = [
-        "site",
-        "latitude",
-        "longitude",
-        "records",
-        "mean_ws_100",
-        "median_ws_100",
-        "p90_ws_100",
-        "std_ws_100",
-        "turbulence_proxy",
-        "mean_rho",
-        "mean_power_density",
-        "mean_ws_10",
-        "winter_mean_ws_100",
-        "summer_mean_ws_100",
-        "weibull_k",
-        "weibull_c",
-        "shear_exponent",
-        "dominant_dir_1",
-        "dominant_dir_1_pct",
-        "dominant_dir_2",
-        "dominant_dir_2_pct",
-        "duplicate_timestamps",
-        "missing_timestamps",
-        "extreme_ws_100_count",
-    ]
-    comparison_df = qa_df[comparison_cols]
-    comparison_df.to_csv(SITE_COMPARISON_PATH, index=False)
+        comparison_cols = [
+            "site",
+            "latitude",
+            "longitude",
+            "records",
+            "mean_ws_100",
+            "median_ws_100",
+            "p90_ws_100",
+            "std_ws_100",
+            "turbulence_proxy",
+            "mean_rho",
+            "mean_power_density",
+            "mean_ws_10",
+            "winter_mean_ws_100",
+            "summer_mean_ws_100",
+            "weibull_k",
+            "weibull_c",
+            "shear_exponent",
+            "dominant_dir_1",
+            "dominant_dir_1_pct",
+            "dominant_dir_2",
+            "dominant_dir_2_pct",
+            "duplicate_timestamps",
+            "missing_timestamps",
+            "extreme_ws_100_count",
+        ]
+        comparison_df = qa_df[comparison_cols]
+        comparison_df.to_csv(SITE_COMPARISON_PATH, index=False)
 
-    seasonal_df = qa_df[
-        ["site", "winter_mean_ws_100", "summer_mean_ws_100"]
-    ].copy()
-    seasonal_df["winter_mean_ws_100"] = seasonal_df["winter_mean_ws_100"].round(2)
-    seasonal_df["summer_mean_ws_100"] = seasonal_df["summer_mean_ws_100"].round(2)
-    seasonal_df.to_csv(SEASONAL_COMPARISON_PATH, index=False)
+        seasonal_df = qa_df[
+            ["site", "winter_mean_ws_100", "summer_mean_ws_100"]
+        ].copy()
+        seasonal_df["winter_mean_ws_100"] = seasonal_df["winter_mean_ws_100"].round(2)
+        seasonal_df["summer_mean_ws_100"] = seasonal_df["summer_mean_ws_100"].round(2)
+        seasonal_df.to_csv(SEASONAL_COMPARISON_PATH, index=False)
 
-    weibull_df = qa_df[
-        ["site", "weibull_k", "weibull_c", "shear_exponent", "turbulence_proxy"]
-    ].copy()
-    weibull_df.to_csv(WEIBULL_PARAMETERS_PATH, index=False)
+        weibull_df = qa_df[
+            ["site", "weibull_k", "weibull_c", "shear_exponent", "turbulence_proxy"]
+        ].copy()
+        weibull_df.to_csv(WEIBULL_PARAMETERS_PATH, index=False)
 
-    monthly_climatology_df = (
-        pd.concat(monthly_climatology_results, ignore_index=True)
-        .sort_values(["site", "month"])
-        .reset_index(drop=True)
-    )
-    monthly_climatology_df.to_csv(MONTHLY_CLIMATOLOGY_PATH, index=False)
+        monthly_climatology_df = (
+            pd.concat(monthly_climatology_results, ignore_index=True)
+            .sort_values(["site", "month"])
+            .reset_index(drop=True)
+        )
+        monthly_climatology_df.to_csv(MONTHLY_CLIMATOLOGY_PATH, index=False)
 
-    directional_frequency_df = (
-        pd.concat(directional_frequency_results, ignore_index=True)
-        .sort_values(["site", "direction"])
-        .reset_index(drop=True)
-    )
-    directional_frequency_df.to_csv(DIRECTIONAL_FREQUENCY_PATH, index=False)
+        directional_frequency_df = (
+            pd.concat(directional_frequency_results, ignore_index=True)
+            .sort_values(["site", "direction"])
+            .reset_index(drop=True)
+        )
+        directional_frequency_df.to_csv(DIRECTIONAL_FREQUENCY_PATH, index=False)
 
-    qa_df.to_csv(TABLES_DIR / "qa_summary.csv", index=False)
-    comparison_df.to_csv(TABLES_DIR / "site_comparison.csv", index=False)
-    seasonal_df.to_csv(TABLES_DIR / "seasonal_wind_comparison.csv", index=False)
-    weibull_df.to_csv(TABLES_DIR / "weibull_parameters.csv", index=False)
-    monthly_climatology_df.to_csv(TABLES_DIR / "monthly_wind_climatology.csv", index=False)
-    directional_frequency_df.to_csv(TABLES_DIR / "directional_frequency.csv", index=False)
+        qa_df.to_csv(TABLES_DIR / "qa_summary.csv", index=False)
+        comparison_df.to_csv(TABLES_DIR / "site_comparison.csv", index=False)
+        seasonal_df.to_csv(TABLES_DIR / "seasonal_wind_comparison.csv", index=False)
+        weibull_df.to_csv(TABLES_DIR / "weibull_parameters.csv", index=False)
+        monthly_climatology_df.to_csv(TABLES_DIR / "monthly_wind_climatology.csv", index=False)
+        directional_frequency_df.to_csv(TABLES_DIR / "directional_frequency.csv", index=False)
 
-    print("Wind resource analysis complete.")
-    print(f"QA summary saved to: {QA_SUMMARY_PATH}")
-    print(f"Site comparison saved to: {SITE_COMPARISON_PATH}")
-    print(f"Seasonal comparison saved to: {SEASONAL_COMPARISON_PATH}")
-    print(f"Weibull parameters saved to: {WEIBULL_PARAMETERS_PATH}")
-    print(f"Monthly climatology saved to: {MONTHLY_CLIMATOLOGY_PATH}")
-    print(f"Directional frequency saved to: {DIRECTIONAL_FREQUENCY_PATH}")
-    print(f"Figures saved to: {FIGURES_DIR}")
+        print("Wind resource analysis complete.")
+        print(f"QA summary saved to: {QA_SUMMARY_PATH}")
+        print(f"Site comparison saved to: {SITE_COMPARISON_PATH}")
+        print(f"Seasonal comparison saved to: {SEASONAL_COMPARISON_PATH}")
+        print(f"Weibull parameters saved to: {WEIBULL_PARAMETERS_PATH}")
+        print(f"Monthly climatology saved to: {MONTHLY_CLIMATOLOGY_PATH}")
+        print(f"Directional frequency saved to: {DIRECTIONAL_FREQUENCY_PATH}")
+        print(f"Figures saved to: {FIGURES_DIR}")
+        return 0
+
+    except Exception as exc:
+        print(f"ERROR: {exc}")
+        return 1
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

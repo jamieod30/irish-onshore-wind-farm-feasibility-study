@@ -1,2 +1,2 @@
 model,site_name,layout_name,num_turbines,installed_capacity_mw,gross_aep_gwh,net_aep_gwh,wake_loss_gwh,wake_loss_pct,gross_capacity_factor,net_capacity_factor,availability_loss_applied,electrical_loss_applied
-NOJ,galway,baseline_aligned,12,50.40000000000001,138.9329849729473,132.2562316841797,6.6767532887676,4.8057365859285905,0.3146811466554035,0.29955839966156517,False,False
+NOJ,baseline,baseline_aligned,12,50.40000000000001,138.9329849729473,132.2562316841797,6.6767532887676,4.8057365859285905,0.3146811466554035,0.29955839966156517,False,False

@@ -1,0 +1,26 @@
+{
+  "case_id": "fid_7",
+  "layout_name": "layout_fid7_6t_candidate",
+  "site": "fid_7",
+  "status": "selected optimisation case layout",
+  "description": "Selected layout for optimisation case comparison against the fixed baseline benchmark. This case is intended for downstream QA and PyWake rerun.",
+  "layout_file": "data/optimisation/fid_7/selected_layout/layout_fid_7_aligned.csv",
+  "n_turbines": 6,
+  "installed_capacity_mw": 25.2,
+  "turbine_model": "Vestas V136-4.2 MW",
+  "hub_height_m": 112.0,
+  "rotor_diameter_m": 136.0,
+  "rated_power_mw": 4.2,
+  "spacing_summary": {
+    "min_nearest_spacing_m": 569.2451141643642,
+    "mean_nearest_spacing_m": 696.2281188578877,
+    "min_nearest_spacing_D": 4.185625839443854,
+    "mean_nearest_spacing_D": 5.1193244033668215
+  },
+  "limitations": [
+    "Geometric/selection-stage case only",
+    "No terrain-optimised micro-siting applied unless explicitly documented elsewhere",
+    "No electrical design optimisation applied here",
+    "Wake performance must be reassessed separately"
+  ]
+}

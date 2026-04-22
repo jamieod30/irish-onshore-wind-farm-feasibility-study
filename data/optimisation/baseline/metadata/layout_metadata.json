@@ -1,6 +1,6 @@
 {
   "layout_name": "baseline_aligned",
-  "site": "galway",
+  "site": "baseline",
   "status": "initial unconstrained baseline layout",
   "description": "Preliminary layout anchored to the selected Galway ERA5 reference location and arranged using feasibility-stage spacing assumptions prior to constraint screening or wake-driven refinement.",
   "coordinate_system": "EPSG:32629",

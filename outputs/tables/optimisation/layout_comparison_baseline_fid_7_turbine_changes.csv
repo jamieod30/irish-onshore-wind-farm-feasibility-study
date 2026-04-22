@@ -1,0 +1,13 @@
+turbine_id,change_type,easting_m_baseline,northing_m_baseline,easting_m_refined,northing_m_refined,delta_easting_m,delta_northing_m,movement_distance_m,rated_power_mw_baseline,rated_power_mw_refined,rotor_diameter_m_baseline,rotor_diameter_m_refined,case_id,comparison_id
+T01,moved,450251,5928155,447756.0,5936154.0,-2495.0,7999.0,8379.082646686331,4.2,4.2,136,136.0,fid_7,baseline_vs_fid_7
+T02,moved,449770,5928636,448436.0,5935312.0,-1334.0,6676.0,6807.975616877605,4.2,4.2,136,136.0,fid_7,baseline_vs_fid_7
+T03,moved,449289,5929117,448930.0,5936676.0,-359.0,7559.0,7567.520201492693,4.2,4.2,136,136.0,fid_7,baseline_vs_fid_7
+T04,moved,449578,5927482,448902.0,5935932.0,-676.0,8450.0,8476.99687389349,4.2,4.2,136,136.0,fid_7,baseline_vs_fid_7
+T05,moved,449097,5927963,447453.0,5934923.0,-1644.0,6960.0,7151.526829985329,4.2,4.2,136,136.0,fid_7,baseline_vs_fid_7
+T06,moved,448616,5928444,448250.0,5935850.0,-366.0,7406.0,7415.038233212287,4.2,4.2,136,136.0,fid_7,baseline_vs_fid_7
+T07,removed,448905,5926809,,,,,0.0,4.2,,136,,fid_7,baseline_vs_fid_7
+T08,removed,448424,5927290,,,,,0.0,4.2,,136,,fid_7,baseline_vs_fid_7
+T09,removed,447943,5927771,,,,,0.0,4.2,,136,,fid_7,baseline_vs_fid_7
+T10,removed,448232,5926136,,,,,0.0,4.2,,136,,fid_7,baseline_vs_fid_7
+T11,removed,447751,5926617,,,,,0.0,4.2,,136,,fid_7,baseline_vs_fid_7
+T12,removed,447270,5927098,,,,,0.0,4.2,,136,,fid_7,baseline_vs_fid_7

@@ -1,10 +1,10 @@
-from pathlib import Path
-import pandas as pd
-import numpy as np
+from __future__ import annotations
 
-# ---------------------------------------------------------------------
-# Configuration
-# ---------------------------------------------------------------------
+from pathlib import Path
+
+import numpy as np
+import pandas as pd
+
 REPO_ROOT = Path(__file__).resolve().parents[2]
 
 DERIVED_DIR = REPO_ROOT / "data" / "era5" / "derived"
@@ -100,158 +100,161 @@ def build_resource_index(df: pd.DataFrame) -> pd.Series:
 
         normalised_parts.append(normalised.rename(col))
 
-    resource_index = pd.concat(normalised_parts, axis=1).mean(axis=1)
-    return resource_index
+    return pd.concat(normalised_parts, axis=1).mean(axis=1)
 
 
 def shear_band_score(alpha: float) -> float:
     if pd.isna(alpha):
         return np.nan
-
     if alpha < 0.08:
         return 2.0
-    elif alpha < 0.14:
+    if alpha < 0.14:
         return 4.0
-    elif alpha <= 0.20:
+    if alpha <= 0.20:
         return 5.0
-    elif alpha <= 0.25:
+    if alpha <= 0.25:
         return 4.0
-    elif alpha <= 0.30:
+    if alpha <= 0.30:
         return 3.0
-    elif alpha <= 0.40:
+    if alpha <= 0.40:
         return 2.0
-    else:
-        return 1.0
+    return 1.0
 
 
-def main() -> None:
-    validate_weights(WEIGHTS)
+def main() -> int:
+    try:
+        validate_weights(WEIGHTS)
 
-    df = pd.read_csv(SITE_COMPARISON_FILE)
-    validate_columns(df, REQUIRED_SITE_COLUMNS, "site_comparison.csv")
+        df = pd.read_csv(SITE_COMPARISON_FILE)
+        validate_columns(df, REQUIRED_SITE_COLUMNS, "site_comparison.csv")
 
-    if df["site"].duplicated().any():
-        dupes = df.loc[df["site"].duplicated(), "site"].tolist()
-        raise ValueError(f"Duplicate site names found in site_comparison.csv: {dupes}")
+        if df["site"].duplicated().any():
+            dupes = df.loc[df["site"].duplicated(), "site"].tolist()
+            raise ValueError(f"Duplicate site names found in site_comparison.csv: {dupes}")
 
-    df["top2_directional_share_pct"] = (
-        pd.to_numeric(df["dominant_dir_1_pct"], errors="coerce")
-        + pd.to_numeric(df["dominant_dir_2_pct"], errors="coerce")
-    )
-
-    if df["top2_directional_share_pct"].isna().any():
-        raise ValueError(
-            "Could not compute top2_directional_share_pct from dominant direction percentages."
+        df["top2_directional_share_pct"] = (
+            pd.to_numeric(df["dominant_dir_1_pct"], errors="coerce")
+            + pd.to_numeric(df["dominant_dir_2_pct"], errors="coerce")
         )
 
-    df["resource_index"] = build_resource_index(df)
+        if df["top2_directional_share_pct"].isna().any():
+            raise ValueError(
+                "Could not compute top2_directional_share_pct from dominant direction percentages."
+            )
 
-    df["resource_score"] = min_max_score(df["resource_index"], higher_is_better=True)
-    df["weibull_k_score"] = min_max_score(df["weibull_k"], higher_is_better=True)
-    df["directional_consistency_score"] = min_max_score(
-        df["top2_directional_share_pct"], higher_is_better=True
-    )
-    df["winter_score"] = min_max_score(df["winter_mean_ws_100"], higher_is_better=True)
-    df["shear_score"] = df["shear_exponent"].apply(shear_band_score)
-    df["turbulence_score"] = min_max_score(df["turbulence_proxy"], higher_is_better=False)
+        df["resource_index"] = build_resource_index(df)
 
-    scoring_columns = [
-        "resource_score",
-        "weibull_k_score",
-        "directional_consistency_score",
-        "winter_score",
-        "shear_score",
-        "turbulence_score",
-    ]
+        df["resource_score"] = min_max_score(df["resource_index"], higher_is_better=True)
+        df["weibull_k_score"] = min_max_score(df["weibull_k"], higher_is_better=True)
+        df["directional_consistency_score"] = min_max_score(
+            df["top2_directional_share_pct"], higher_is_better=True
+        )
+        df["winter_score"] = min_max_score(df["winter_mean_ws_100"], higher_is_better=True)
+        df["shear_score"] = df["shear_exponent"].apply(shear_band_score)
+        df["turbulence_score"] = min_max_score(df["turbulence_proxy"], higher_is_better=False)
 
-    if df[scoring_columns].isna().any().any():
-        raise ValueError("One or more scoring columns contain missing values after scoring.")
+        scoring_columns = [
+            "resource_score",
+            "weibull_k_score",
+            "directional_consistency_score",
+            "winter_score",
+            "shear_score",
+            "turbulence_score",
+        ]
 
-    df["weighted_score"] = (
-        df["resource_score"] * WEIGHTS["resource_score"]
-        + df["weibull_k_score"] * WEIGHTS["weibull_k_score"]
-        + df["directional_consistency_score"] * WEIGHTS["directional_consistency_score"]
-        + df["winter_score"] * WEIGHTS["winter_score"]
-        + df["shear_score"] * WEIGHTS["shear_score"]
-        + df["turbulence_score"] * WEIGHTS["turbulence_score"]
-    )
+        if df[scoring_columns].isna().any().any():
+            raise ValueError("One or more scoring columns contain missing values after scoring.")
 
-    df = df.sort_values("weighted_score", ascending=False).reset_index(drop=True)
-    df["rank"] = np.arange(1, len(df) + 1)
+        df["weighted_score"] = (
+            df["resource_score"] * WEIGHTS["resource_score"]
+            + df["weibull_k_score"] * WEIGHTS["weibull_k_score"]
+            + df["directional_consistency_score"] * WEIGHTS["directional_consistency_score"]
+            + df["winter_score"] * WEIGHTS["winter_score"]
+            + df["shear_score"] * WEIGHTS["shear_score"]
+            + df["turbulence_score"] * WEIGHTS["turbulence_score"]
+        )
 
-    scoring_cols = [
-        "rank",
-        "site",
-        "latitude",
-        "longitude",
-        "mean_ws_100",
-        "mean_power_density",
-        "weibull_c",
-        "weibull_k",
-        "winter_mean_ws_100",
-        "shear_exponent",
-        "turbulence_proxy",
-        "dominant_dir_1",
-        "dominant_dir_1_pct",
-        "dominant_dir_2",
-        "dominant_dir_2_pct",
-        "top2_directional_share_pct",
-        "resource_index",
-        "resource_score",
-        "weibull_k_score",
-        "directional_consistency_score",
-        "winter_score",
-        "shear_score",
-        "turbulence_score",
-        "weighted_score",
-    ]
+        df = df.sort_values("weighted_score", ascending=False).reset_index(drop=True)
+        df["rank"] = np.arange(1, len(df) + 1)
 
-    ranking_cols = [
-        "rank",
-        "site",
-        "weighted_score",
-    ]
+        scoring_cols = [
+            "rank",
+            "site",
+            "latitude",
+            "longitude",
+            "mean_ws_100",
+            "mean_power_density",
+            "weibull_c",
+            "weibull_k",
+            "winter_mean_ws_100",
+            "shear_exponent",
+            "turbulence_proxy",
+            "dominant_dir_1",
+            "dominant_dir_1_pct",
+            "dominant_dir_2",
+            "dominant_dir_2_pct",
+            "top2_directional_share_pct",
+            "resource_index",
+            "resource_score",
+            "weibull_k_score",
+            "directional_consistency_score",
+            "winter_score",
+            "shear_score",
+            "turbulence_score",
+            "weighted_score",
+        ]
 
-    scoring_df = df[scoring_cols].copy()
-    ranking_df = df[ranking_cols].copy()
+        ranking_cols = [
+            "rank",
+            "site",
+            "weighted_score",
+        ]
 
-    round_cols_scoring = [
-        "latitude",
-        "longitude",
-        "mean_ws_100",
-        "mean_power_density",
-        "weibull_c",
-        "weibull_k",
-        "winter_mean_ws_100",
-        "shear_exponent",
-        "turbulence_proxy",
-        "dominant_dir_1_pct",
-        "dominant_dir_2_pct",
-        "top2_directional_share_pct",
-        "resource_index",
-        "resource_score",
-        "weibull_k_score",
-        "directional_consistency_score",
-        "winter_score",
-        "shear_score",
-        "turbulence_score",
-        "weighted_score",
-    ]
+        scoring_df = df[scoring_cols].copy()
+        ranking_df = df[ranking_cols].copy()
 
-    scoring_df[round_cols_scoring] = scoring_df[round_cols_scoring].round(3)
-    ranking_df["weighted_score"] = ranking_df["weighted_score"].round(3)
+        round_cols_scoring = [
+            "latitude",
+            "longitude",
+            "mean_ws_100",
+            "mean_power_density",
+            "weibull_c",
+            "weibull_k",
+            "winter_mean_ws_100",
+            "shear_exponent",
+            "turbulence_proxy",
+            "dominant_dir_1_pct",
+            "dominant_dir_2_pct",
+            "top2_directional_share_pct",
+            "resource_index",
+            "resource_score",
+            "weibull_k_score",
+            "directional_consistency_score",
+            "winter_score",
+            "shear_score",
+            "turbulence_score",
+            "weighted_score",
+        ]
 
-    scoring_df.to_csv(SCORING_OUTPUT_FILE, index=False)
-    ranking_df.to_csv(RANKING_OUTPUT_FILE, index=False)
+        scoring_df.loc[:, round_cols_scoring] = scoring_df[round_cols_scoring].round(3)
+        ranking_df.loc[:, "weighted_score"] = ranking_df["weighted_score"].round(3)
 
-    scoring_df.to_csv(TABLES_SCORING_OUTPUT_FILE, index=False)
-    ranking_df.to_csv(TABLES_RANKING_OUTPUT_FILE, index=False)
+        scoring_df.to_csv(SCORING_OUTPUT_FILE, index=False)
+        ranking_df.to_csv(RANKING_OUTPUT_FILE, index=False)
 
-    print(f"Site selection scoring saved to: {SCORING_OUTPUT_FILE}")
-    print(f"Site selection ranking saved to: {RANKING_OUTPUT_FILE}")
-    print()
-    print(ranking_df.to_string(index=False))
+        scoring_df.to_csv(TABLES_SCORING_OUTPUT_FILE, index=False)
+        ranking_df.to_csv(TABLES_RANKING_OUTPUT_FILE, index=False)
+
+        print(f"Site selection scoring saved to: {SCORING_OUTPUT_FILE}")
+        print(f"Site selection ranking saved to: {RANKING_OUTPUT_FILE}")
+        print()
+        print(ranking_df.to_string(index=False))
+        return 0
+
+    except Exception as exc:
+        print(f"ERROR: {exc}")
+        return 1
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

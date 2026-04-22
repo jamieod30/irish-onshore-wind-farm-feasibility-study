@@ -1,0 +1,2 @@
+case_id,layout_name,source_layout_csv,output_dir,num_turbines,installed_capacity_mw,gross_aep_gwh,net_aep_gwh,wake_loss_gwh,wake_loss_pct,gross_capacity_factor,net_capacity_factor
+fid_7,layout_fid7_6t_candidate,data/optimisation/fid_7/selected_layout/layout_fid_7_aligned.csv,outputs/wake/selected_cases/fid_7,6,25.2,69.46649248647365,66.58623997288458,2.8802525135890704,4.146247220053476,0.3146811466554036,0.3016336883601715

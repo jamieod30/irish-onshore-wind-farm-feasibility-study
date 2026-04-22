@@ -1,7 +1,17 @@
 {
+  "run_name": "baseline_noj",
   "model": "NOJ",
+  "benchmark_case": true,
+  "site_name": "baseline",
+  "resource_site_name": "galway",
   "turbine_name": "vestas_v136_4p2mw",
-  "layout_file": "data/layouts/baseline_aligned/layout_baseline_aligned.csv",
+  "layout_name": "baseline_aligned",
+  "layout_file": "data/optimisation/baseline/layout/layout_baseline_aligned.csv",
+  "resource_inputs": {
+    "site_config": "data/wake_inputs/selected_site/site_config.json",
+    "sector_frequency": "data/wake_inputs/selected_site/sector_frequency.csv",
+    "weibull_global": "data/wake_inputs/selected_site/weibull_global.csv"
+  },
   "simulation_grid": {
     "wd_deg": [
       0.0,
@@ -27,11 +37,21 @@
     "n_wd": 16,
     "n_ws": 31
   },
+  "losses_applied": {
+    "wake": true,
+    "availability": false,
+    "electrical": false
+  },
+  "outputs": [
+    "farm_summary.csv",
+    "turbine_summary.csv",
+    "flow_case_summary.csv",
+    "run_metadata.json",
+    "wake_map.png"
+  ],
   "assumptions": {
     "wake_model": "N. O. Jensen (NOJ) engineering wake model",
     "resource_model": "UniformWeibullSite using 16 directional sectors with globally uniform Weibull parameters",
-    "availability_losses_applied": false,
-    "electrical_losses_applied": false,
     "result_basis": "gross AEP = no wake losses only; net AEP = wake losses only"
   }
 }

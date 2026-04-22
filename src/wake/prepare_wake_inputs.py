@@ -1,7 +1,10 @@
-from pathlib import Path
+from __future__ import annotations
+
 import json
-import pandas as pd
+from pathlib import Path
+
 import numpy as np
+import pandas as pd
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 
@@ -14,6 +17,7 @@ SITE_CONFIG_FILE = OUTPUT_DIR / "site_config.json"
 
 SECTOR_OUTPUT_FILE = OUTPUT_DIR / "sector_frequency.csv"
 WEIBULL_OUTPUT_FILE = OUTPUT_DIR / "weibull_global.csv"
+SUMMARY_OUTPUT_FILE = OUTPUT_DIR / "wake_input_summary.csv"
 
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
@@ -39,23 +43,29 @@ DIR_TO_DEG = {
 EXPECTED_DIRECTIONS = list(DIR_TO_DEG.keys())
 
 
-def load_site_name(config_path: Path) -> str:
+def load_site_config(config_path: Path) -> dict:
     if not config_path.exists():
         raise FileNotFoundError(
             f"Missing site configuration file: {config_path}\n"
-            f"Create site_config.json before running this script."
+            "Create site_config.json before running this script."
         )
 
-    with open(config_path, "r", encoding="utf-8") as f:
+    with config_path.open("r", encoding="utf-8") as f:
         config = json.load(f)
 
-    if "site_name" not in config:
-        raise KeyError(f"'site_name' not found in {config_path}")
+    required_keys = ["site_name"]
+    missing = [k for k in required_keys if k not in config]
+    if missing:
+        raise KeyError(f"Missing required config key(s) in {config_path}: {missing}")
 
+    return config
+
+
+def load_site_name(config_path: Path) -> str:
+    config = load_site_config(config_path)
     site_name = str(config["site_name"]).strip().lower()
     if not site_name:
         raise ValueError(f"'site_name' in {config_path} is empty")
-
     return site_name
 
 
@@ -117,13 +127,11 @@ def prepare_sector_frequency(site_name: str) -> pd.DataFrame:
             f"Directional probabilities sum to {total_probability:.6f}, not approximately 1.0."
         )
 
-    output_df = (
+    return (
         site_df[["wd_deg", "probability"]]
         .sort_values("wd_deg")
         .reset_index(drop=True)
     )
-
-    return output_df
 
 
 def prepare_weibull_global(site_name: str) -> pd.DataFrame:
@@ -152,7 +160,6 @@ def prepare_weibull_global(site_name: str) -> pd.DataFrame:
         )
 
     row = site_df.iloc[0]
-
     k = float(row["weibull_k"])
     c = float(row["weibull_c"])
 
@@ -162,65 +169,61 @@ def prepare_weibull_global(site_name: str) -> pd.DataFrame:
     return pd.DataFrame({"k": [k], "c": [c]})
 
 
+def export_summary(site_name: str, sector_df: pd.DataFrame, weibull_df: pd.DataFrame) -> None:
+    dominant = sector_df.sort_values("probability", ascending=False).head(3).reset_index(drop=True)
+
+    summary = {
+        "site": site_name,
+        "n_sectors": len(sector_df),
+        "probability_sum": float(sector_df["probability"].sum()),
+        "weibull_k": float(weibull_df.loc[0, "k"]),
+        "weibull_c": float(weibull_df.loc[0, "c"]),
+        "dominant_dir_1_deg": float(dominant.loc[0, "wd_deg"]),
+        "dominant_dir_1_prob": float(dominant.loc[0, "probability"]),
+        "dominant_dir_2_deg": float(dominant.loc[1, "wd_deg"]),
+        "dominant_dir_2_prob": float(dominant.loc[1, "probability"]),
+        "dominant_dir_3_deg": float(dominant.loc[2, "wd_deg"]),
+        "dominant_dir_3_prob": float(dominant.loc[2, "probability"]),
+    }
+
+    pd.DataFrame([summary]).to_csv(SUMMARY_OUTPUT_FILE, index=False)
+    print(f"Wake input summary saved to: {SUMMARY_OUTPUT_FILE}")
+
+
 def print_summary(site_name: str, sector_df: pd.DataFrame, weibull_df: pd.DataFrame) -> None:
     total_probability = float(sector_df["probability"].sum())
     dominant = sector_df.sort_values("probability", ascending=False).head(3).copy()
 
     print("Wake input preparation complete.")
     print(f"Selected site: {site_name}")
-    print()
     print(f"Sector frequency file: {SECTOR_OUTPUT_FILE}")
     print(f"Weibull file: {WEIBULL_OUTPUT_FILE}")
-    print()
     print(f"Directional probability sum: {total_probability:.6f}")
     print(f"Weibull k: {weibull_df.loc[0, 'k']:.3f}")
     print(f"Weibull c: {weibull_df.loc[0, 'c']:.3f}")
-    print()
     print("Top 3 directional sectors:")
     print(dominant.to_string(index=False))
 
-def export_summary(site_name: str, sector_df: pd.DataFrame, weibull_df: pd.DataFrame) -> None:
-    total_probability = float(sector_df["probability"].sum())
 
-    dominant = sector_df.sort_values("probability", ascending=False).head(3)
+def main() -> int:
+    try:
+        validate_input_files()
 
-    summary = {
-        "site": site_name,
-        "n_sectors": len(sector_df),
-        "probability_sum": total_probability,
-        "weibull_k": float(weibull_df.loc[0, "k"]),
-        "weibull_c": float(weibull_df.loc[0, "c"]),
-        "dominant_dir_1_deg": float(dominant.iloc[0]["wd_deg"]),
-        "dominant_dir_1_prob": float(dominant.iloc[0]["probability"]),
-        "dominant_dir_2_deg": float(dominant.iloc[1]["wd_deg"]),
-        "dominant_dir_2_prob": float(dominant.iloc[1]["probability"]),
-        "dominant_dir_3_deg": float(dominant.iloc[2]["wd_deg"]),
-        "dominant_dir_3_prob": float(dominant.iloc[2]["probability"]),
-    }
+        site_name = load_site_name(SITE_CONFIG_FILE)
+        sector_df = prepare_sector_frequency(site_name)
+        weibull_df = prepare_weibull_global(site_name)
 
-    summary_df = pd.DataFrame([summary])
+        sector_df.to_csv(SECTOR_OUTPUT_FILE, index=False)
+        weibull_df.to_csv(WEIBULL_OUTPUT_FILE, index=False)
 
-    output_path = OUTPUT_DIR / "wake_input_summary.csv"
-    summary_df.to_csv(output_path, index=False)
+        export_summary(site_name, sector_df, weibull_df)
+        print_summary(site_name, sector_df, weibull_df)
+        return 0
 
-    print(f"Wake input summary saved to: {output_path}")
+    except Exception as exc:
+        print(f"ERROR: {exc}")
+        return 1
 
-
-def main() -> None:
-    validate_input_files()
-
-    site_name = load_site_name(SITE_CONFIG_FILE)
-
-    sector_df = prepare_sector_frequency(site_name)
-    weibull_df = prepare_weibull_global(site_name)
-
-    sector_df.to_csv(SECTOR_OUTPUT_FILE, index=False)
-    weibull_df.to_csv(WEIBULL_OUTPUT_FILE, index=False)
-
-    export_summary(site_name, sector_df, weibull_df)
-
-    print_summary(site_name, sector_df, weibull_df)
-    
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

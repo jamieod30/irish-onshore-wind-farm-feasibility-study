@@ -1,8 +1,10 @@
-from pathlib import Path
+from __future__ import annotations
+
 import json
+from pathlib import Path
+
 import numpy as np
 import pandas as pd
-
 from py_wake.site import UniformWeibullSite
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
@@ -20,13 +22,16 @@ def load_site_config() -> dict:
     if not SITE_CONFIG_FILE.exists():
         raise FileNotFoundError(f"Missing site config file: {SITE_CONFIG_FILE}")
 
-    with open(SITE_CONFIG_FILE, "r", encoding="utf-8") as f:
+    with SITE_CONFIG_FILE.open("r", encoding="utf-8") as f:
         config = json.load(f)
 
-    required = ["site_key", "site_name"]
+    required = ["site_name"]
     missing = [k for k in required if k not in config]
     if missing:
         raise KeyError(f"Missing required site config fields: {missing}")
+
+    if "site_key" not in config:
+        config["site_key"] = str(config["site_name"]).strip().lower()
 
     return config
 
@@ -56,7 +61,7 @@ def load_sector_frequency() -> pd.DataFrame:
     if len(df) != 16:
         raise ValueError(f"Expected 16 wind direction sectors, found {len(df)}.")
 
-    if not np.allclose(df["wd_deg"].to_numpy(), EXPECTED_WD):
+    if not np.allclose(df["wd_deg"].to_numpy(dtype=float), EXPECTED_WD):
         raise ValueError(
             "Wind direction sectors do not match expected 16-sector format "
             "(0, 22.5, ..., 337.5)."
@@ -110,23 +115,19 @@ def build_site() -> UniformWeibullSite:
     sector_df = load_sector_frequency()
     weibull_df = load_weibull_global()
 
-    wd = sector_df["wd_deg"].to_numpy(dtype=float)
     p_wd = sector_df["probability"].to_numpy(dtype=float)
     k = float(weibull_df.loc[0, "k"])
     a = float(weibull_df.loc[0, "c"])
 
-    # UniformWeibullSite expects one Weibull A and k value per direction sector
-    a_arr = np.full_like(wd, a, dtype=float)
-    k_arr = np.full_like(wd, k, dtype=float)
+    a_arr = np.full(len(sector_df), a, dtype=float)
+    k_arr = np.full(len(sector_df), k, dtype=float)
 
-    site = UniformWeibullSite(
+    return UniformWeibullSite(
         p_wd=p_wd,
         a=a_arr,
         k=k_arr,
         ti=0.1,
     )
-
-    return site
 
 
 def summarize_site() -> None:

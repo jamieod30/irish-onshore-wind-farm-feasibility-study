@@ -1,13 +1,13 @@
 turbine_id,easting_m,northing_m,hub_height_m,rotor_diameter_m,rated_power_mw,turbine_model,layout_name,site,crs
-T01,450251,5928155,112,136,4.2,Vestas V136-4.2 MW,baseline_aligned,galway,EPSG:32629
-T02,449770,5928636,112,136,4.2,Vestas V136-4.2 MW,baseline_aligned,galway,EPSG:32629
-T03,449289,5929117,112,136,4.2,Vestas V136-4.2 MW,baseline_aligned,galway,EPSG:32629
-T04,449578,5927482,112,136,4.2,Vestas V136-4.2 MW,baseline_aligned,galway,EPSG:32629
-T05,449097,5927963,112,136,4.2,Vestas V136-4.2 MW,baseline_aligned,galway,EPSG:32629
-T06,448616,5928444,112,136,4.2,Vestas V136-4.2 MW,baseline_aligned,galway,EPSG:32629
-T07,448905,5926809,112,136,4.2,Vestas V136-4.2 MW,baseline_aligned,galway,EPSG:32629
-T08,448424,5927290,112,136,4.2,Vestas V136-4.2 MW,baseline_aligned,galway,EPSG:32629
-T09,447943,5927771,112,136,4.2,Vestas V136-4.2 MW,baseline_aligned,galway,EPSG:32629
-T10,448232,5926136,112,136,4.2,Vestas V136-4.2 MW,baseline_aligned,galway,EPSG:32629
-T11,447751,5926617,112,136,4.2,Vestas V136-4.2 MW,baseline_aligned,galway,EPSG:32629
-T12,447270,5927098,112,136,4.2,Vestas V136-4.2 MW,baseline_aligned,galway,EPSG:32629
+T01,450251,5928155,112,136,4.2,Vestas V136-4.2 MW,baseline_aligned,baseline,EPSG:32629
+T02,449770,5928636,112,136,4.2,Vestas V136-4.2 MW,baseline_aligned,baseline,EPSG:32629
+T03,449289,5929117,112,136,4.2,Vestas V136-4.2 MW,baseline_aligned,baseline,EPSG:32629
+T04,449578,5927482,112,136,4.2,Vestas V136-4.2 MW,baseline_aligned,baseline,EPSG:32629
+T05,449097,5927963,112,136,4.2,Vestas V136-4.2 MW,baseline_aligned,baseline,EPSG:32629
+T06,448616,5928444,112,136,4.2,Vestas V136-4.2 MW,baseline_aligned,baseline,EPSG:32629
+T07,448905,5926809,112,136,4.2,Vestas V136-4.2 MW,baseline_aligned,baseline,EPSG:32629
+T08,448424,5927290,112,136,4.2,Vestas V136-4.2 MW,baseline_aligned,baseline,EPSG:32629
+T09,447943,5927771,112,136,4.2,Vestas V136-4.2 MW,baseline_aligned,baseline,EPSG:32629
+T10,448232,5926136,112,136,4.2,Vestas V136-4.2 MW,baseline_aligned,baseline,EPSG:32629
+T11,447751,5926617,112,136,4.2,Vestas V136-4.2 MW,baseline_aligned,baseline,EPSG:32629
+T12,447270,5927098,112,136,4.2,Vestas V136-4.2 MW,baseline_aligned,baseline,EPSG:32629

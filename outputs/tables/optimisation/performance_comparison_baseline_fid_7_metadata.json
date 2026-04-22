@@ -1,0 +1,66 @@
+{
+  "comparison_bundle": "performance_comparison_baseline_fid_7",
+  "case_ids": [
+    "fid_7"
+  ],
+  "comparisons": [
+    {
+      "comparison_id": "baseline_vs_fid_7_performance",
+      "case_id": "fid_7",
+      "comparison_type": "baseline_vs_selected_case_performance",
+      "baseline_reference_csv": "data/optimisation/baseline/metadata/baseline_performance_reference.csv",
+      "case_farm_summary_csv": "outputs/wake/selected_cases/fid_7/farm_summary.csv",
+      "case_run_metadata_json": "outputs/wake/selected_cases/fid_7/run_metadata.json",
+      "summary": {
+        "comparison_id": "baseline_vs_fid_7_performance",
+        "case_id": "fid_7",
+        "baseline_reference_case_id": "baseline_noj",
+        "baseline_layout_name": "baseline_aligned",
+        "case_layout_name": "layout_fid7_6t_candidate",
+        "resource_site_name": "galway",
+        "baseline_num_turbines": 12,
+        "case_num_turbines": 6,
+        "delta_num_turbines": -6,
+        "baseline_installed_capacity_mw": 50.40000000000001,
+        "case_installed_capacity_mw": 25.2,
+        "delta_installed_capacity_mw": -25.200000000000014,
+        "pct_change_installed_capacity_mw": -50.000000000000014,
+        "baseline_gross_aep_gwh": 138.9329849729473,
+        "case_gross_aep_gwh": 69.46649248647365,
+        "delta_gross_aep_gwh": -69.46649248647365,
+        "pct_change_gross_aep_gwh": -50.0,
+        "baseline_net_aep_gwh": 132.2562316841797,
+        "case_net_aep_gwh": 66.58623997288458,
+        "delta_net_aep_gwh": -65.66999171129513,
+        "pct_change_net_aep_gwh": -49.65360866179168,
+        "baseline_wake_loss_gwh": 6.6767532887676,
+        "case_wake_loss_gwh": 2.8802525135890704,
+        "delta_wake_loss_gwh": -3.7965007751785294,
+        "pct_change_wake_loss_gwh": -56.86148058765985,
+        "baseline_wake_loss_pct": 4.805736585928591,
+        "case_wake_loss_pct": 4.146247220053476,
+        "delta_wake_loss_pct": -0.6594893658751158,
+        "abs_delta_wake_loss_pct": 0.6594893658751158,
+        "baseline_gross_capacity_factor": 0.3146811466554035,
+        "case_gross_capacity_factor": 0.3146811466554036,
+        "delta_gross_capacity_factor": 1.1102230246251565e-16,
+        "baseline_net_capacity_factor": 0.2995583996615651,
+        "case_net_capacity_factor": 0.3016336883601715,
+        "delta_net_capacity_factor": 0.0020752886986064034,
+        "baseline_net_aep_per_mw": 2.624131581035311,
+        "case_net_aep_per_mw": 2.6423111100351027,
+        "delta_net_aep_per_mw": 0.018179528999791472,
+        "baseline_net_aep_per_turbine": 11.02135264034831,
+        "case_net_aep_per_turbine": 11.09770666214743,
+        "delta_net_aep_per_turbine": 0.07635402179912099,
+        "source_case_farm_summary": "outputs/wake/selected_cases/fid_7/farm_summary.csv",
+        "source_case_run_metadata": "outputs/wake/selected_cases/fid_7/run_metadata.json"
+      },
+      "notes": [
+        "Comparison is performance-based using completed PyWake runs.",
+        "Baseline reference is treated as the fixed project benchmark.",
+        "Selected-case run is compared directly against the benchmark on energy and wake metrics."
+      ]
+    }
+  ]
+}

@@ -1,7 +1,11 @@
 turbine_id,easting_m,northing_m,site,layout_name
-T01,447756,5936154,fid_7,layout_fid7_6t_candidate
-T02,448436,5935312,fid_7,layout_fid7_6t_candidate
-T03,448930,5936676,fid_7,layout_fid7_6t_candidate
-T04,448902,5935932,fid_7,layout_fid7_6t_candidate
-T05,447453,5934923,fid_7,layout_fid7_6t_candidate
-T06,448250,5935850,fid_7,layout_fid7_6t_candidate
+T01,449133,5936508,fid_7,layout_fid7_10t_candidate
+T02,449226,5935776,fid_7,layout_fid7_10t_candidate
+T03,448112,5936804,fid_7,layout_fid7_10t_candidate
+T04,448712,5935877,fid_7,layout_fid7_10t_candidate
+T05,449104,5935241,fid_7,layout_fid7_10t_candidate
+T06,447614,5936185,fid_7,layout_fid7_10t_candidate
+T07,448416,5935270,fid_7,layout_fid7_10t_candidate
+T08,447825,5935427,fid_7,layout_fid7_10t_candidate
+T09,447112,5935079,fid_7,layout_fid7_10t_candidate
+T10,447335,5934626,fid_7,layout_fid7_10t_candidate

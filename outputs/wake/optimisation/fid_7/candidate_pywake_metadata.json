@@ -2,7 +2,7 @@
   "case_id": "fid_7",
   "comparison_basis": "candidate_layout_internal_screening",
   "turbine_name": "vestas_v136_4p2mw",
-  "n_candidate_layouts": 3,
+  "n_candidate_layouts": 8,
   "baseline_reference": {
     "reference_case_id": "baseline_noj",
     "wake_loss_pct": 4.805736585928591,
@@ -15,6 +15,16 @@
     "acceptable_upper": 6.0
   },
   "candidate_layouts": [
+    {
+      "layout_name": "layout_fid7_10t_candidate",
+      "source_layout_csv": "data/optimisation/fid_7/candidate_layouts/layout_fid7_10t_candidate.csv",
+      "output_dir": "outputs/wake/optimisation/fid_7/layout_fid7_10t_candidate"
+    },
+    {
+      "layout_name": "layout_fid7_11t_candidate",
+      "source_layout_csv": "data/optimisation/fid_7/candidate_layouts/layout_fid7_11t_candidate.csv",
+      "output_dir": "outputs/wake/optimisation/fid_7/layout_fid7_11t_candidate"
+    },
     {
       "layout_name": "layout_fid7_12t_candidate",
       "source_layout_csv": "data/optimisation/fid_7/candidate_layouts/layout_fid7_12t_candidate.csv",
@@ -29,26 +39,41 @@
       "layout_name": "layout_fid7_6t_candidate",
       "source_layout_csv": "data/optimisation/fid_7/candidate_layouts/layout_fid7_6t_candidate.csv",
       "output_dir": "outputs/wake/optimisation/fid_7/layout_fid7_6t_candidate"
+    },
+    {
+      "layout_name": "layout_fid7_7t_candidate",
+      "source_layout_csv": "data/optimisation/fid_7/candidate_layouts/layout_fid7_7t_candidate.csv",
+      "output_dir": "outputs/wake/optimisation/fid_7/layout_fid7_7t_candidate"
+    },
+    {
+      "layout_name": "layout_fid7_8t_candidate",
+      "source_layout_csv": "data/optimisation/fid_7/candidate_layouts/layout_fid7_8t_candidate.csv",
+      "output_dir": "outputs/wake/optimisation/fid_7/layout_fid7_8t_candidate"
+    },
+    {
+      "layout_name": "layout_fid7_9t_candidate",
+      "source_layout_csv": "data/optimisation/fid_7/candidate_layouts/layout_fid7_9t_candidate.csv",
+      "output_dir": "outputs/wake/optimisation/fid_7/layout_fid7_9t_candidate"
     }
   ],
   "selection_rule": "Choose highest net_aep_gwh within acceptable wake-loss band; if none acceptable, prefer lowest wake-loss overcrowded layout or highest net AEP underutilised layout as applicable.",
   "best_candidate": {
     "rank_overall": 1,
     "case_id": "fid_7",
-    "layout_name": "layout_fid7_6t_candidate",
-    "source_layout_csv": "data/optimisation/fid_7/candidate_layouts/layout_fid7_6t_candidate.csv",
-    "output_dir": "outputs/wake/optimisation/fid_7/layout_fid7_6t_candidate",
-    "num_turbines": 6,
-    "installed_capacity_mw": 25.2,
-    "gross_aep_gwh": 69.46649248647365,
-    "net_aep_gwh": 66.58623997288458,
-    "wake_loss_gwh": 2.8802525135890704,
-    "wake_loss_pct": 4.146247220053476,
-    "gross_capacity_factor": 0.3146811466554036,
-    "net_capacity_factor": 0.3016336883601715,
+    "layout_name": "layout_fid7_10t_candidate",
+    "source_layout_csv": "data/optimisation/fid_7/candidate_layouts/layout_fid7_10t_candidate.csv",
+    "output_dir": "outputs/wake/optimisation/fid_7/layout_fid7_10t_candidate",
+    "num_turbines": 10,
+    "installed_capacity_mw": 42.00000000000001,
+    "gross_aep_gwh": 115.77748747745608,
+    "net_aep_gwh": 109.6108846924969,
+    "wake_loss_gwh": 6.166602784959181,
+    "wake_loss_pct": 5.326253764282049,
+    "gross_capacity_factor": 0.3146811466554035,
+    "net_capacity_factor": 0.29792043023618414,
     "benchmark_wake_loss_pct": 4.805736585928591,
-    "delta_vs_benchmark_wake_loss_pct": -0.6594893658751158,
-    "abs_delta_vs_benchmark_wake_loss_pct": 0.6594893658751158,
+    "delta_vs_benchmark_wake_loss_pct": 0.5205171783534572,
+    "abs_delta_vs_benchmark_wake_loss_pct": 0.5205171783534572,
     "wake_loss_band": "acceptable",
     "wake_loss_band_priority": 1,
     "selection_basis": "highest net AEP within acceptable wake-loss band",

@@ -1,12 +1,12 @@
 {
-  "run_name": "fid_7",
+  "run_name": "layout_fid7_11t_candidate",
   "model": "NOJ",
   "benchmark_case": false,
   "site_name": "fid_7",
   "resource_site_name": "galway",
   "turbine_name": "vestas_v136_4p2mw",
-  "layout_name": "layout_fid7_10t_candidate",
-  "layout_file": "data/optimisation/fid_7/selected_layout/layout_fid_7_aligned.csv",
+  "layout_name": "layout_fid7_11t_candidate",
+  "layout_file": "data/optimisation/fid_7/candidate_layouts/layout_fid7_11t_candidate.csv",
   "resource_inputs": {
     "site_config": "data/wake_inputs/selected_site/site_config.json",
     "sector_frequency": "data/wake_inputs/selected_site/sector_frequency.csv",
@@ -46,8 +46,7 @@
     "farm_summary.csv",
     "turbine_summary.csv",
     "flow_case_summary.csv",
-    "run_metadata.json",
-    "wake_map.png"
+    "run_metadata.json"
   ],
   "assumptions": {
     "wake_model": "N. O. Jensen (NOJ) engineering wake model",

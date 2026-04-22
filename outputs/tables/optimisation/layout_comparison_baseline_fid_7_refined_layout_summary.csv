@@ -1,2 +1,2 @@
 case_id,layout_name,site,n_turbines,installed_capacity_mw,hub_height_m,rotor_diameter_m,rated_power_mw,min_nearest_spacing_m,mean_nearest_spacing_m,min_nearest_spacing_D,mean_nearest_spacing_D,min_easting_m,max_easting_m,min_northing_m,max_northing_m,centroid_easting_m,centroid_northing_m
-fid_7,layout_fid7_6t_candidate,fid_7,6,25.2,112.0,136.0,4.2,569.2451141643642,696.2281188578877,4.185625839443854,5.1193244033668215,447453.0,448930.0,5934923.0,5936676.0,448287.8333333333,5935807.833333333
+fid_7,layout_fid7_10t_candidate,fid_7,10,42.00000000000001,112.0,136.0,4.2,504.9138540384884,614.8378987252715,3.712601867930062,4.5208669023917025,447112.0,449226.0,5934626.0,5936804.0,448258.9,5935679.3

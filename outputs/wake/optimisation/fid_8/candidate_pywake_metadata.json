@@ -1,0 +1,98 @@
+{
+  "case_id": "fid_8",
+  "comparison_basis": "candidate_layout_internal_screening",
+  "turbine_name": "vestas_v136_4p2mw",
+  "n_candidate_layouts": 10,
+  "baseline_reference": {
+    "reference_case_id": "baseline_noj",
+    "wake_loss_pct": 4.805736585928591,
+    "net_aep_gwh": 132.2562316841797,
+    "installed_capacity_mw": 50.40000000000001,
+    "net_capacity_factor": 0.2995583996615651
+  },
+  "wake_loss_thresholds_pct": {
+    "underutilised_lt": 4.0,
+    "acceptable_upper": 6.0
+  },
+  "candidate_layouts": [
+    {
+      "layout_name": "layout_fid7_10t_candidate",
+      "source_layout_csv": "data/optimisation/fid_8/candidate_layouts/layout_fid7_10t_candidate.csv",
+      "output_dir": "outputs/wake/optimisation/fid_8/layout_fid7_10t_candidate"
+    },
+    {
+      "layout_name": "layout_fid7_10t_candidate_v2",
+      "source_layout_csv": "data/optimisation/fid_8/candidate_layouts/layout_fid7_10t_candidate_v2.csv",
+      "output_dir": "outputs/wake/optimisation/fid_8/layout_fid7_10t_candidate_v2"
+    },
+    {
+      "layout_name": "layout_fid7_10t_candidate_v3",
+      "source_layout_csv": "data/optimisation/fid_8/candidate_layouts/layout_fid7_10t_candidate_v3.csv",
+      "output_dir": "outputs/wake/optimisation/fid_8/layout_fid7_10t_candidate_v3"
+    },
+    {
+      "layout_name": "layout_fid7_11t_candidate",
+      "source_layout_csv": "data/optimisation/fid_8/candidate_layouts/layout_fid7_11t_candidate.csv",
+      "output_dir": "outputs/wake/optimisation/fid_8/layout_fid7_11t_candidate"
+    },
+    {
+      "layout_name": "layout_fid7_12t_candidate",
+      "source_layout_csv": "data/optimisation/fid_8/candidate_layouts/layout_fid7_12t_candidate.csv",
+      "output_dir": "outputs/wake/optimisation/fid_8/layout_fid7_12t_candidate"
+    },
+    {
+      "layout_name": "layout_fid7_5t_candidate",
+      "source_layout_csv": "data/optimisation/fid_8/candidate_layouts/layout_fid7_5t_candidate.csv",
+      "output_dir": "outputs/wake/optimisation/fid_8/layout_fid7_5t_candidate"
+    },
+    {
+      "layout_name": "layout_fid7_6t_candidate",
+      "source_layout_csv": "data/optimisation/fid_8/candidate_layouts/layout_fid7_6t_candidate.csv",
+      "output_dir": "outputs/wake/optimisation/fid_8/layout_fid7_6t_candidate"
+    },
+    {
+      "layout_name": "layout_fid7_7t_candidate",
+      "source_layout_csv": "data/optimisation/fid_8/candidate_layouts/layout_fid7_7t_candidate.csv",
+      "output_dir": "outputs/wake/optimisation/fid_8/layout_fid7_7t_candidate"
+    },
+    {
+      "layout_name": "layout_fid7_8t_candidate",
+      "source_layout_csv": "data/optimisation/fid_8/candidate_layouts/layout_fid7_8t_candidate.csv",
+      "output_dir": "outputs/wake/optimisation/fid_8/layout_fid7_8t_candidate"
+    },
+    {
+      "layout_name": "layout_fid7_9t_candidate",
+      "source_layout_csv": "data/optimisation/fid_8/candidate_layouts/layout_fid7_9t_candidate.csv",
+      "output_dir": "outputs/wake/optimisation/fid_8/layout_fid7_9t_candidate"
+    }
+  ],
+  "selection_rule": "Choose highest net_aep_gwh within acceptable wake-loss band; if none acceptable, prefer lowest wake-loss overcrowded layout or highest net AEP underutilised layout as applicable.",
+  "best_candidate": {
+    "rank_overall": 1,
+    "case_id": "fid_8",
+    "layout_name": "layout_fid7_10t_candidate_v2",
+    "source_layout_csv": "data/optimisation/fid_8/candidate_layouts/layout_fid7_10t_candidate_v2.csv",
+    "output_dir": "outputs/wake/optimisation/fid_8/layout_fid7_10t_candidate_v2",
+    "num_turbines": 10,
+    "installed_capacity_mw": 42.00000000000001,
+    "gross_aep_gwh": 115.77748747745608,
+    "net_aep_gwh": 109.73662524073248,
+    "wake_loss_gwh": 6.040862236723598,
+    "wake_loss_pct": 5.217648411915883,
+    "gross_capacity_factor": 0.3146811466554035,
+    "net_capacity_factor": 0.29826219080433913,
+    "benchmark_wake_loss_pct": 4.805736585928591,
+    "delta_vs_benchmark_wake_loss_pct": 0.4119118259872918,
+    "abs_delta_vs_benchmark_wake_loss_pct": 0.4119118259872918,
+    "wake_loss_band": "acceptable",
+    "wake_loss_band_priority": 1,
+    "selection_basis": "highest net AEP within acceptable wake-loss band",
+    "selected_layout_flag": true
+  },
+  "notes": [
+    "This step compares candidate layouts within one optimisation case.",
+    "This is separate from baseline-vs-case comparison.",
+    "Wake-loss bands are benchmark-informed and intended for feasibility-stage screening.",
+    "Wake maps are not batch-exported here."
+  ]
+}

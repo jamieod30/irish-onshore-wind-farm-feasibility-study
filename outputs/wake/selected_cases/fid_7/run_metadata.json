@@ -5,7 +5,7 @@
   "site_name": "fid_7",
   "resource_site_name": "galway",
   "turbine_name": "vestas_v136_4p2mw",
-  "layout_name": "layout_fid7_10t_candidate",
+  "layout_name": "layout_multisite_12t_candidate_d",
   "layout_file": "data/optimisation/fid_7/selected_layout/layout_fid_7_aligned.csv",
   "resource_inputs": {
     "site_config": "data/wake_inputs/selected_site/site_config.json",

@@ -2,7 +2,7 @@
   "case_id": "fid_7",
   "comparison_basis": "candidate_layout_internal_screening",
   "turbine_name": "vestas_v136_4p2mw",
-  "n_candidate_layouts": 8,
+  "n_candidate_layouts": 15,
   "baseline_reference": {
     "reference_case_id": "baseline_noj",
     "wake_loss_pct": 4.805736585928591,
@@ -19,6 +19,16 @@
       "layout_name": "layout_fid7_10t_candidate",
       "source_layout_csv": "data/optimisation/fid_7/candidate_layouts/layout_fid7_10t_candidate.csv",
       "output_dir": "outputs/wake/optimisation/fid_7/layout_fid7_10t_candidate"
+    },
+    {
+      "layout_name": "layout_fid7_10t_candidate_v2",
+      "source_layout_csv": "data/optimisation/fid_7/candidate_layouts/layout_fid7_10t_candidate_v2.csv",
+      "output_dir": "outputs/wake/optimisation/fid_7/layout_fid7_10t_candidate_v2"
+    },
+    {
+      "layout_name": "layout_fid7_10t_candidate_v3",
+      "source_layout_csv": "data/optimisation/fid_7/candidate_layouts/layout_fid7_10t_candidate_v3.csv",
+      "output_dir": "outputs/wake/optimisation/fid_7/layout_fid7_10t_candidate_v3"
     },
     {
       "layout_name": "layout_fid7_11t_candidate",
@@ -54,26 +64,51 @@
       "layout_name": "layout_fid7_9t_candidate",
       "source_layout_csv": "data/optimisation/fid_7/candidate_layouts/layout_fid7_9t_candidate.csv",
       "output_dir": "outputs/wake/optimisation/fid_7/layout_fid7_9t_candidate"
+    },
+    {
+      "layout_name": "layout_multisite_12t_candidate_a",
+      "source_layout_csv": "data/optimisation/fid_7/candidate_layouts/layout_multisite_12t_candidate_a.csv",
+      "output_dir": "outputs/wake/optimisation/fid_7/layout_multisite_12t_candidate_a"
+    },
+    {
+      "layout_name": "layout_multisite_12t_candidate_b",
+      "source_layout_csv": "data/optimisation/fid_7/candidate_layouts/layout_multisite_12t_candidate_b.csv",
+      "output_dir": "outputs/wake/optimisation/fid_7/layout_multisite_12t_candidate_b"
+    },
+    {
+      "layout_name": "layout_multisite_12t_candidate_c",
+      "source_layout_csv": "data/optimisation/fid_7/candidate_layouts/layout_multisite_12t_candidate_c.csv",
+      "output_dir": "outputs/wake/optimisation/fid_7/layout_multisite_12t_candidate_c"
+    },
+    {
+      "layout_name": "layout_multisite_12t_candidate_d",
+      "source_layout_csv": "data/optimisation/fid_7/candidate_layouts/layout_multisite_12t_candidate_d.csv",
+      "output_dir": "outputs/wake/optimisation/fid_7/layout_multisite_12t_candidate_d"
+    },
+    {
+      "layout_name": "layout_multisite_12t_candidate_e",
+      "source_layout_csv": "data/optimisation/fid_7/candidate_layouts/layout_multisite_12t_candidate_e.csv",
+      "output_dir": "outputs/wake/optimisation/fid_7/layout_multisite_12t_candidate_e"
     }
   ],
   "selection_rule": "Choose highest net_aep_gwh within acceptable wake-loss band; if none acceptable, prefer lowest wake-loss overcrowded layout or highest net AEP underutilised layout as applicable.",
   "best_candidate": {
     "rank_overall": 1,
     "case_id": "fid_7",
-    "layout_name": "layout_fid7_10t_candidate",
-    "source_layout_csv": "data/optimisation/fid_7/candidate_layouts/layout_fid7_10t_candidate.csv",
-    "output_dir": "outputs/wake/optimisation/fid_7/layout_fid7_10t_candidate",
-    "num_turbines": 10,
-    "installed_capacity_mw": 42.00000000000001,
-    "gross_aep_gwh": 115.77748747745608,
-    "net_aep_gwh": 109.6108846924969,
-    "wake_loss_gwh": 6.166602784959181,
-    "wake_loss_pct": 5.326253764282049,
+    "layout_name": "layout_multisite_12t_candidate_d",
+    "source_layout_csv": "data/optimisation/fid_7/candidate_layouts/layout_multisite_12t_candidate_d.csv",
+    "output_dir": "outputs/wake/optimisation/fid_7/layout_multisite_12t_candidate_d",
+    "num_turbines": 12,
+    "installed_capacity_mw": 50.40000000000001,
+    "gross_aep_gwh": 138.9329849729473,
+    "net_aep_gwh": 131.6105907857203,
+    "wake_loss_gwh": 7.322394187227019,
+    "wake_loss_pct": 5.2704504899630695,
     "gross_capacity_factor": 0.3146811466554035,
-    "net_capacity_factor": 0.29792043023618414,
+    "net_capacity_factor": 0.29809603261968237,
     "benchmark_wake_loss_pct": 4.805736585928591,
-    "delta_vs_benchmark_wake_loss_pct": 0.5205171783534572,
-    "abs_delta_vs_benchmark_wake_loss_pct": 0.5205171783534572,
+    "delta_vs_benchmark_wake_loss_pct": 0.4647139040344781,
+    "abs_delta_vs_benchmark_wake_loss_pct": 0.4647139040344781,
     "wake_loss_band": "acceptable",
     "wake_loss_band_priority": 1,
     "selection_basis": "highest net AEP within acceptable wake-loss band",

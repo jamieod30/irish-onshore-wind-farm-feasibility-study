@@ -1,0 +1,182 @@
+{
+  "comparison_bundle": "layout_comparison_baseline_fid_45_fid_48_fid_7_fid_8_fid_94",
+  "case_ids": [
+    "fid_45",
+    "fid_48",
+    "fid_7",
+    "fid_8",
+    "fid_94"
+  ],
+  "comparisons": [
+    {
+      "comparison_id": "baseline_vs_fid_45",
+      "case_id": "fid_45",
+      "baseline_layout_file": "data/optimisation/baseline/layout/layout_baseline_aligned.csv",
+      "refined_layout_file": "data/optimisation/fid_45/selected_layout/layout_fid_45_aligned.csv",
+      "comparison_type": "baseline_vs_selected_case",
+      "summary": {
+        "comparison_id": "baseline_vs_fid_45",
+        "case_id": "fid_45",
+        "baseline_layout_name": "baseline_aligned",
+        "refined_layout_name": "layout_fid7_10t_candidate_v2",
+        "baseline_n_turbines": 12,
+        "refined_n_turbines": 10,
+        "delta_n_turbines": -2,
+        "baseline_installed_capacity_mw": 50.40000000000001,
+        "refined_installed_capacity_mw": 42.00000000000001,
+        "delta_installed_capacity_mw": -8.400000000000006,
+        "n_retained": 0,
+        "n_moved": 10,
+        "n_removed": 2,
+        "n_added": 0,
+        "max_movement_distance_m": 8537.25418386966,
+        "mean_movement_distance_m_for_moved": 7932.030964218722,
+        "baseline_min_nearest_spacing_m": 680.2367235014588,
+        "refined_min_nearest_spacing_m": 504.9138540384884,
+        "baseline_mean_nearest_spacing_m": 680.2367235014589,
+        "refined_mean_nearest_spacing_m": 618.4667276391252
+      },
+      "notes": [
+        "Comparison is geometric and capacity-based only",
+        "No wake model rerun included in this step",
+        "Selected layout should be re-checked with layout QA before PyWake rerun"
+      ]
+    },
+    {
+      "comparison_id": "baseline_vs_fid_48",
+      "case_id": "fid_48",
+      "baseline_layout_file": "data/optimisation/baseline/layout/layout_baseline_aligned.csv",
+      "refined_layout_file": "data/optimisation/fid_48/selected_layout/layout_fid_48_aligned.csv",
+      "comparison_type": "baseline_vs_selected_case",
+      "summary": {
+        "comparison_id": "baseline_vs_fid_48",
+        "case_id": "fid_48",
+        "baseline_layout_name": "baseline_aligned",
+        "refined_layout_name": "layout_fid7_10t_candidate_v2",
+        "baseline_n_turbines": 12,
+        "refined_n_turbines": 10,
+        "delta_n_turbines": -2,
+        "baseline_installed_capacity_mw": 50.40000000000001,
+        "refined_installed_capacity_mw": 42.00000000000001,
+        "delta_installed_capacity_mw": -8.400000000000006,
+        "n_retained": 0,
+        "n_moved": 10,
+        "n_removed": 2,
+        "n_added": 0,
+        "max_movement_distance_m": 8537.25418386966,
+        "mean_movement_distance_m_for_moved": 7932.030964218722,
+        "baseline_min_nearest_spacing_m": 680.2367235014588,
+        "refined_min_nearest_spacing_m": 504.9138540384884,
+        "baseline_mean_nearest_spacing_m": 680.2367235014589,
+        "refined_mean_nearest_spacing_m": 618.4667276391252
+      },
+      "notes": [
+        "Comparison is geometric and capacity-based only",
+        "No wake model rerun included in this step",
+        "Selected layout should be re-checked with layout QA before PyWake rerun"
+      ]
+    },
+    {
+      "comparison_id": "baseline_vs_fid_7",
+      "case_id": "fid_7",
+      "baseline_layout_file": "data/optimisation/baseline/layout/layout_baseline_aligned.csv",
+      "refined_layout_file": "data/optimisation/fid_7/selected_layout/layout_fid_7_aligned.csv",
+      "comparison_type": "baseline_vs_selected_case",
+      "summary": {
+        "comparison_id": "baseline_vs_fid_7",
+        "case_id": "fid_7",
+        "baseline_layout_name": "baseline_aligned",
+        "refined_layout_name": "layout_multisite_12t_candidate_d",
+        "baseline_n_turbines": 12,
+        "refined_n_turbines": 12,
+        "delta_n_turbines": 0,
+        "baseline_installed_capacity_mw": 50.40000000000001,
+        "refined_installed_capacity_mw": 50.40000000000001,
+        "delta_installed_capacity_mw": 0.0,
+        "n_retained": 0,
+        "n_moved": 12,
+        "n_removed": 0,
+        "n_added": 0,
+        "max_movement_distance_m": 8537.25418386966,
+        "mean_movement_distance_m_for_moved": 7959.713397724762,
+        "baseline_min_nearest_spacing_m": 680.2367235014588,
+        "refined_min_nearest_spacing_m": 504.9138540384884,
+        "baseline_mean_nearest_spacing_m": 680.2367235014589,
+        "refined_mean_nearest_spacing_m": 610.6804515050044
+      },
+      "notes": [
+        "Comparison is geometric and capacity-based only",
+        "No wake model rerun included in this step",
+        "Selected layout should be re-checked with layout QA before PyWake rerun"
+      ]
+    },
+    {
+      "comparison_id": "baseline_vs_fid_8",
+      "case_id": "fid_8",
+      "baseline_layout_file": "data/optimisation/baseline/layout/layout_baseline_aligned.csv",
+      "refined_layout_file": "data/optimisation/fid_8/selected_layout/layout_fid_8_aligned.csv",
+      "comparison_type": "baseline_vs_selected_case",
+      "summary": {
+        "comparison_id": "baseline_vs_fid_8",
+        "case_id": "fid_8",
+        "baseline_layout_name": "baseline_aligned",
+        "refined_layout_name": "layout_fid7_10t_candidate_v2",
+        "baseline_n_turbines": 12,
+        "refined_n_turbines": 10,
+        "delta_n_turbines": -2,
+        "baseline_installed_capacity_mw": 50.40000000000001,
+        "refined_installed_capacity_mw": 42.00000000000001,
+        "delta_installed_capacity_mw": -8.400000000000006,
+        "n_retained": 0,
+        "n_moved": 10,
+        "n_removed": 2,
+        "n_added": 0,
+        "max_movement_distance_m": 8537.25418386966,
+        "mean_movement_distance_m_for_moved": 7932.030964218722,
+        "baseline_min_nearest_spacing_m": 680.2367235014588,
+        "refined_min_nearest_spacing_m": 504.9138540384884,
+        "baseline_mean_nearest_spacing_m": 680.2367235014589,
+        "refined_mean_nearest_spacing_m": 618.4667276391252
+      },
+      "notes": [
+        "Comparison is geometric and capacity-based only",
+        "No wake model rerun included in this step",
+        "Selected layout should be re-checked with layout QA before PyWake rerun"
+      ]
+    },
+    {
+      "comparison_id": "baseline_vs_fid_94",
+      "case_id": "fid_94",
+      "baseline_layout_file": "data/optimisation/baseline/layout/layout_baseline_aligned.csv",
+      "refined_layout_file": "data/optimisation/fid_94/selected_layout/layout_fid_94_aligned.csv",
+      "comparison_type": "baseline_vs_selected_case",
+      "summary": {
+        "comparison_id": "baseline_vs_fid_94",
+        "case_id": "fid_94",
+        "baseline_layout_name": "baseline_aligned",
+        "refined_layout_name": "layout_fid7_10t_candidate_v2",
+        "baseline_n_turbines": 12,
+        "refined_n_turbines": 10,
+        "delta_n_turbines": -2,
+        "baseline_installed_capacity_mw": 50.40000000000001,
+        "refined_installed_capacity_mw": 42.00000000000001,
+        "delta_installed_capacity_mw": -8.400000000000006,
+        "n_retained": 0,
+        "n_moved": 10,
+        "n_removed": 2,
+        "n_added": 0,
+        "max_movement_distance_m": 8537.25418386966,
+        "mean_movement_distance_m_for_moved": 7932.030964218722,
+        "baseline_min_nearest_spacing_m": 680.2367235014588,
+        "refined_min_nearest_spacing_m": 504.9138540384884,
+        "baseline_mean_nearest_spacing_m": 680.2367235014589,
+        "refined_mean_nearest_spacing_m": 618.4667276391252
+      },
+      "notes": [
+        "Comparison is geometric and capacity-based only",
+        "No wake model rerun included in this step",
+        "Selected layout should be re-checked with layout QA before PyWake rerun"
+      ]
+    }
+  ]
+}

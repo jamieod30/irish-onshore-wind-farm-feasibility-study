@@ -1,0 +1,2 @@
+model,site_name,layout_name,num_turbines,installed_capacity_mw,gross_aep_gwh,net_aep_gwh,wake_loss_gwh,wake_loss_pct,gross_capacity_factor,net_capacity_factor,availability_loss_applied,electrical_loss_applied
+NOJ,fid_48,layout_fid7_12t_candidate,12,50.40000000000001,138.9329849729473,128.4309838297623,10.502001143184998,7.559040889555437,0.3146811466554035,0.2908942701079996,False,False

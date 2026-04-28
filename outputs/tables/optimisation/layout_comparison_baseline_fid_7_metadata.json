@@ -14,7 +14,7 @@
         "comparison_id": "baseline_vs_fid_7",
         "case_id": "fid_7",
         "baseline_layout_name": "baseline_aligned",
-        "refined_layout_name": "layout_fid7_10t_candidate",
+        "refined_layout_name": "layout_fid7_10t_candidate_v2",
         "baseline_n_turbines": 12,
         "refined_n_turbines": 10,
         "delta_n_turbines": -2,
@@ -26,11 +26,11 @@
         "n_removed": 2,
         "n_added": 0,
         "max_movement_distance_m": 8537.25418386966,
-        "mean_movement_distance_m_for_moved": 7941.438553261493,
+        "mean_movement_distance_m_for_moved": 7932.030964218722,
         "baseline_min_nearest_spacing_m": 680.2367235014588,
         "refined_min_nearest_spacing_m": 504.9138540384884,
         "baseline_mean_nearest_spacing_m": 680.2367235014589,
-        "refined_mean_nearest_spacing_m": 614.8378987252715
+        "refined_mean_nearest_spacing_m": 618.4667276391252
       },
       "notes": [
         "Comparison is geometric and capacity-based only",

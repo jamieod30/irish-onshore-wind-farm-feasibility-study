@@ -1,0 +1,56 @@
+{
+  "run_name": "layout_fid7_12t_candidate",
+  "model": "NOJ",
+  "benchmark_case": false,
+  "site_name": "fid_8",
+  "resource_site_name": "galway",
+  "turbine_name": "vestas_v136_4p2mw",
+  "layout_name": "layout_fid7_12t_candidate",
+  "layout_file": "data/optimisation/fid_8/candidate_layouts/layout_fid7_12t_candidate.csv",
+  "resource_inputs": {
+    "site_config": "data/wake_inputs/selected_site/site_config.json",
+    "sector_frequency": "data/wake_inputs/selected_site/sector_frequency.csv",
+    "weibull_global": "data/wake_inputs/selected_site/weibull_global.csv"
+  },
+  "simulation_grid": {
+    "wd_deg": [
+      0.0,
+      22.5,
+      45.0,
+      67.5,
+      90.0,
+      112.5,
+      135.0,
+      157.5,
+      180.0,
+      202.5,
+      225.0,
+      247.5,
+      270.0,
+      292.5,
+      315.0,
+      337.5
+    ],
+    "ws_ms_min": 0.0,
+    "ws_ms_max": 30.0,
+    "ws_step_ms": 1.0,
+    "n_wd": 16,
+    "n_ws": 31
+  },
+  "losses_applied": {
+    "wake": true,
+    "availability": false,
+    "electrical": false
+  },
+  "outputs": [
+    "farm_summary.csv",
+    "turbine_summary.csv",
+    "flow_case_summary.csv",
+    "run_metadata.json"
+  ],
+  "assumptions": {
+    "wake_model": "N. O. Jensen (NOJ) engineering wake model",
+    "resource_model": "UniformWeibullSite using 16 directional sectors with globally uniform Weibull parameters",
+    "result_basis": "gross AEP = no wake losses only; net AEP = wake losses only"
+  }
+}

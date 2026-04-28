@@ -1,21 +1,21 @@
 {
   "case_id": "fid_7",
-  "layout_name": "layout_fid7_10t_candidate",
+  "layout_name": "layout_multisite_12t_candidate_d",
   "site": "fid_7",
   "status": "selected optimisation case layout",
   "description": "Selected layout for optimisation case comparison against the fixed baseline benchmark. This case is intended for downstream QA and PyWake rerun.",
   "layout_file": "data/optimisation/fid_7/selected_layout/layout_fid_7_aligned.csv",
-  "n_turbines": 10,
-  "installed_capacity_mw": 42.00000000000001,
+  "n_turbines": 12,
+  "installed_capacity_mw": 50.40000000000001,
   "turbine_model": "Vestas V136-4.2 MW",
   "hub_height_m": 112.0,
   "rotor_diameter_m": 136.0,
   "rated_power_mw": 4.2,
   "spacing_summary": {
     "min_nearest_spacing_m": 504.9138540384884,
-    "mean_nearest_spacing_m": 614.8378987252715,
+    "mean_nearest_spacing_m": 610.6804515050044,
     "min_nearest_spacing_D": 3.712601867930062,
-    "mean_nearest_spacing_D": 4.5208669023917025
+    "mean_nearest_spacing_D": 4.490297437536797
   },
   "limitations": [
     "Geometric/selection-stage case only",

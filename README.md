@@ -2,9 +2,22 @@
 
 A reproducible renewable energy engineering project that demonstrates an early-stage onshore wind farm development workflow for Ireland, from national wind resource screening through parcel-level layout optimisation and wake-based performance comparison.
 
+## Start Here
+📄 **Primary Deliverable:**  
+This project is centred around a full feasibility study report including one-page Executive Summary at the beginning. If you wish to only read one item in this repository, start here.
+
+- [Report](./Wind%20Farm%20Feasibility%20Assessment%20for%20a%20Proposed%20Onshore%20Development%20in%20Ireland.pdf)
+
+This full document provides the complete project narrative, including methodology, assumptions, engineering decisions, and final conclusions.
+
+The Executive Summary provides a concise overview of the work undertaken and the key results of the project.  
+
+The remainder of this repository contains the reproducible workflow, data processing scripts, GIS inputs, and modelling outputs used to generate the report.
+
+
 ## Project Summary
 
-This repository presents a preliminary feasibility study for a grid-connected onshore wind project in Ireland. The project is designed to reflect the staged workflow used by renewable energy developers during early project definition.
+This repository contains a reproducible engineering workflow and supporting analysis for a preliminary feasibility study for a grid-connected onshore wind project in Ireland. The project is designed to reflect the staged workflow used by renewable energy developers during early project definition.
 
 The study begins with regional wind resource screening using ERA5 reanalysis data, progresses through site selection and baseline layout development, applies GIS-based environmental and planning constraints, and then refines candidate wind farm layouts within screened developable parcels using PyWake-based wake modelling.
 

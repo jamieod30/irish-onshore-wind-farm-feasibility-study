@@ -172,9 +172,6 @@ Generated project results including:
 - wake modelling outputs
 - optimisation comparison outputs
 
-### `report/`
-Contains the main written feasibility study.
-
 ## Core Tools and Methods
 
 The project uses a hybrid engineering toolchain:
